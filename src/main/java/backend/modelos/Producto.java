@@ -1,9 +1,12 @@
 package backend.modelos;
 
 import java.io.Serializable;
+import java.util.Objects;
 
 public class Producto implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private String nombre;
     private double precio;
@@ -67,6 +70,19 @@ public class Producto implements Serializable
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Producto producto = (Producto) o;
+        return id == producto.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     @Override
