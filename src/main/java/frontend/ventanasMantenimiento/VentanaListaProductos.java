@@ -29,9 +29,6 @@ public class VentanaListaProductos extends JFrame {
     {
     	
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-        // carga de datos para test
-        //Datos.inicializarDatos();
-        //Datos.cargarElementosTEST();
 
         // Columnas de la tabla
         String[] columnas = {"ID", "Nombre", "Precio", "Stock"};
@@ -84,8 +81,6 @@ public class VentanaListaProductos extends JFrame {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
 
                 } else {
-                    // Acción de edición (a implementar)
-                    // Aquí puedes utilizar productoSeleccionado para editarlo
                     Producto productoSeleccionado = listaProductos.get(selectedRow);
                     VentanaEditarProducto editar = new VentanaEditarProducto(productoSeleccionado);
                     editar.addWindowListener(new java.awt.event.WindowAdapter() {
@@ -111,8 +106,6 @@ public class VentanaListaProductos extends JFrame {
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // Acción de eliminación (a implementar)
-                    // Aquí puedes utilizar productoSeleccionado para eliminarlo
                     Producto productoAEliminar = listaProductos.get(selectedRow);
                     new ModelosApp().eliminarProducto(productoAEliminar.getId());
                     listaProductos.remove(selectedRow);

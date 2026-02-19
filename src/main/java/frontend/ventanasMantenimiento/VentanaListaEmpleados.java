@@ -28,8 +28,6 @@ public class VentanaListaEmpleados extends JFrame {
     private void inicializarComponentes() 
     {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-        //Datos.inicializarDatos();
-        //Datos.cargarElementosTEST();
 
         // Columnas de la tabla
         String[] columnas = {"ID", "Nombre", "Apellido", "Edad", "Salario", "Turno"};

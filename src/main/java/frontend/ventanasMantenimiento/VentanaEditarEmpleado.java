@@ -1,11 +1,11 @@
 package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
-import backend.modelos.herenciaEmpleados.*;
-import backend.saves.Datos;
+import backend.modelos.ModelosApp;
+import backend.modelos.herenciaEmpleados.Empleado;
+import backend.modelos.herenciaEmpleados.Turno;
 
 import java.awt.*;
-import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -115,36 +115,7 @@ public class VentanaEditarEmpleado extends JFrame {
                 // Actualizar los datos del empleado
                 empleado.setSalario(salario);
                 empleado.setTurno(turno);
-
-                // Sincronizar con HashMap
-                Datos.getTablaLookUpEmpleados().put(empleado.getId(), empleado);
-
-                // Sincronizar con ArrayList de empleados
-                if (empleado instanceof Vendedor) {
-                    ArrayList<Vendedor> cajeros = Datos.getEmpleadosCajeros();
-                    for (int i = 0; i < cajeros.size(); i++) {
-                        if (cajeros.get(i).getId() == empleado.getId()) {
-                            cajeros.set(i, (Vendedor) empleado);
-                            break;
-                        }
-                    }
-                } else if (empleado instanceof Limpieza) {
-                    ArrayList<Limpieza> limpieza = Datos.getEmpleadosLimpieza();
-                    for (int i = 0; i < limpieza.size(); i++) {
-                        if (limpieza.get(i).getId() == empleado.getId()) {
-                            limpieza.set(i, (Limpieza) empleado);
-                            break;
-                        }
-                    }
-                } else if (empleado instanceof Panadero) {
-                    ArrayList<Panadero> panaderos = Datos.getEmpleadosPanaderos();
-                    for (int i = 0; i < panaderos.size(); i++) {
-                        if (panaderos.get(i).getId() == empleado.getId()) {
-                            panaderos.set(i, (Panadero) empleado);
-                            break;
-                        }
-                    }
-                }
+                new ModelosApp().editarEmpleado(empleado);
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Empleado actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

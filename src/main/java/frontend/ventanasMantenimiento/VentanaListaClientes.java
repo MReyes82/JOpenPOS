@@ -38,9 +38,6 @@ public class VentanaListaClientes extends JFrame {
 
     private void inicializarComponentes() {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-        // cargar datos de prueba
-        //Datos.inicializarDatos();
-        //Datos.cargarElementosTEST();
         
         // Columnas de la tabla
         String[] columnas = {"ID", "Nombre", "Apellido", "Teléfono", "Puntos"};
@@ -91,8 +88,6 @@ public class VentanaListaClientes extends JFrame {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                     
                 } else {
-                    // Acción de edición (a implementar)
-                    // Aquí puedes utilizar clienteSeleccionado para editarlo
                     Cliente clienteSeleccionado = listaClientes.get(selectedRow);
                     VentanaEditarCliente ventanaEditarCliente = new VentanaEditarCliente(clienteSeleccionado);
                     ventanaEditarCliente.addWindowListener(new java.awt.event.WindowAdapter() {
