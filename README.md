@@ -2,7 +2,7 @@
 
 ## Microbusiness Management System
 
-A comprehensive management application for a microbusiness. It provides a graphical user interface to register and maintain information about employees, customers, and products, as well as manage sales and data storage. The application is organized into three main layers: backend, frontend, and resources.
+A management application for a microbusiness. It provides a graphical user interface to register and maintain information about employees, customers, and products, as well as manage sales and data storage.
 
 Built with **Java**, **Maven**, and **Swing UI** for my Java lang workshop Uni class.
 

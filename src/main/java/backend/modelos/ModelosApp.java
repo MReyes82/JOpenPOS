@@ -1,17 +1,14 @@
 package backend.modelos;
 
-import backend.modelos.herenciaEmpleados.Empleado;
-import backend.modelos.herenciaEmpleados.Limpieza;
-import backend.modelos.herenciaEmpleados.Turno;
-import backend.modelos.herenciaEmpleados.Vendedor;
-import backend.modelos.herenciaEmpleados.Panadero;
-import backend.saves.Datos;
-import backend.servicios.Venta;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import javax.swing.JOptionPane;
+import backend.modelos.herenciaEmpleados.Empleado;
+import backend.modelos.herenciaEmpleados.Limpieza;
+import backend.modelos.herenciaEmpleados.Panadero;
+import backend.modelos.herenciaEmpleados.Turno;
+import backend.modelos.herenciaEmpleados.Vendedor;
+import backend.saves.Datos;
 
 /*
 * Metodos relacionadas con funciones para gestion de empleados
@@ -22,11 +19,6 @@ import javax.swing.JOptionPane;
 
 public class ModelosApp
 {
-    public ModelosApp()
-    {
-        // constructor
-    }
-
     public void agregarEmpleadoVendedor(int id, String nombre, String apellido, int edad, double salario, Turno turno)
     {
         ArrayList<Vendedor> empleados = Datos.getEmpleadosCajeros();
@@ -174,7 +166,6 @@ public class ModelosApp
     {
         ArrayList<Cliente> clientes = Datos.getClientes();
         HashMap<Integer, Cliente> tablaLookUpClientes = Datos.getTablaLookUpClientes();
-        // REGRESA NULO?????
 
         Cliente nuevoCliente = new Cliente(
             id,
@@ -266,5 +257,68 @@ public class ModelosApp
         System.out.println("Cliente eliminado con exito");
 
         return;
+    }
+
+    public void editarProducto(Producto producto)
+    {
+        Datos.getTablaLookUpProductos().put(producto.getId(), producto);
+
+        ArrayList<Producto> inventario = Datos.getInventario();
+        for (int i = 0; i < inventario.size(); i++) {
+            if (inventario.get(i).getId() == producto.getId()) {
+                inventario.set(i, producto);
+                break;
+            }
+        }
+
+        System.out.println("Producto editado con exito");
+    }
+
+    public void editarCliente(Cliente cliente)
+    {
+        Datos.getTablaLookUpClientes().put(cliente.getId(), cliente);
+
+        ArrayList<Cliente> clientes = Datos.getClientes();
+        for (int i = 0; i < clientes.size(); i++) {
+            if (clientes.get(i).getId() == cliente.getId()) {
+                clientes.set(i, cliente);
+                break;
+            }
+        }
+
+        System.out.println("Cliente editado con exito");
+    }
+
+    public void editarEmpleado(Empleado empleado)
+    {
+        Datos.getTablaLookUpEmpleados().put(empleado.getId(), empleado);
+
+        if (empleado instanceof Vendedor) {
+            ArrayList<Vendedor> cajeros = Datos.getEmpleadosCajeros();
+            for (int i = 0; i < cajeros.size(); i++) {
+                if (cajeros.get(i).getId() == empleado.getId()) {
+                    cajeros.set(i, (Vendedor) empleado);
+                    break;
+                }
+            }
+        } else if (empleado instanceof Limpieza) {
+            ArrayList<Limpieza> limpieza = Datos.getEmpleadosLimpieza();
+            for (int i = 0; i < limpieza.size(); i++) {
+                if (limpieza.get(i).getId() == empleado.getId()) {
+                    limpieza.set(i, (Limpieza) empleado);
+                    break;
+                }
+            }
+        } else if (empleado instanceof Panadero) {
+            ArrayList<Panadero> panaderos = Datos.getEmpleadosPanaderos();
+            for (int i = 0; i < panaderos.size(); i++) {
+                if (panaderos.get(i).getId() == empleado.getId()) {
+                    panaderos.set(i, (Panadero) empleado);
+                    break;
+                }
+            }
+        }
+
+        System.out.println("Empleado editado con exito");
     }
 }
