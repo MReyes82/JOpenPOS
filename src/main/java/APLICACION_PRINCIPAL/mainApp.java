@@ -12,7 +12,7 @@ public class mainApp {
     }
 
     public static void iniciarModulosInfo() {
-        System.out.println("BIENVENIDO, BREAD_STOREV1.0");
+        System.out.println("BIENVENIDO, JOpenPOSV1.0");
         System.out.println("INICIALIZANDO MODULOS DE INFORMACION");
 
         try {

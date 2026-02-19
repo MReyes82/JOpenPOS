@@ -1,6 +1,7 @@
 package backend.saves;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -107,10 +108,12 @@ public class Datos {
 
     // métodos para cargar ArrayLists desde archivos
     public static void cargarDatosArrayList(ClassLoader classLoader) {
+        String ruta = "src/main/resources/archivosSerializados/";
         try {
             GestorProducto gestorProducto = new GestorProducto();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/productos.ser")) {
-                if (inputStream != null) {
+            File archivoProductos = new File(ruta + "productos.ser");
+            if (archivoProductos.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoProductos)) {
                     ArrayList<Producto> productos = gestorProducto.cargarDatos(inputStream);
                     if (productos != null) {
                         setInventario(productos);
@@ -120,8 +123,9 @@ public class Datos {
             }
 
             GestorLimpieza gestorLimpieza = new GestorLimpieza();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/empleadosLimpieza.ser")) {
-                if (inputStream != null) {
+            File archivoLimpieza = new File(ruta + "empleadosLimpieza.ser");
+            if (archivoLimpieza.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoLimpieza)) {
                     ArrayList<Limpieza> empleadosLimpieza = gestorLimpieza.cargarDatos(inputStream);
                     if (empleadosLimpieza != null) {
                         setEmpleadosLimpieza(empleadosLimpieza);
@@ -131,8 +135,9 @@ public class Datos {
             }
 
             GestorPanadero gestorPanadero = new GestorPanadero();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/empleadosPanaderos.ser")) {
-                if (inputStream != null) {
+            File archivoPanaderos = new File(ruta + "empleadosPanaderos.ser");
+            if (archivoPanaderos.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoPanaderos)) {
                     ArrayList<Panadero> empleadosPanaderos = gestorPanadero.cargarDatos(inputStream);
                     if (empleadosPanaderos != null) {
                         setEmpleadosPanaderos(empleadosPanaderos);
@@ -142,8 +147,9 @@ public class Datos {
             }
 
             GestorVendedor gestorVendedor = new GestorVendedor();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/empleadosCajeros.ser")) {
-                if (inputStream != null) {
+            File archivoCajeros = new File(ruta + "empleadosCajeros.ser");
+            if (archivoCajeros.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoCajeros)) {
                     ArrayList<Vendedor> empleadosCajeros = gestorVendedor.cargarDatos(inputStream);
                     if (empleadosCajeros != null) {
                         setEmpleadosCajeros(empleadosCajeros);
@@ -153,8 +159,9 @@ public class Datos {
             }
 
             GestorCliente gestorCliente = new GestorCliente();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/clientes.ser")) {
-                if (inputStream != null) {
+            File archivoClientes = new File(ruta + "clientes.ser");
+            if (archivoClientes.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoClientes)) {
                     ArrayList<Cliente> clientes = gestorCliente.cargarDatos(inputStream);
                     if (clientes != null) {
                         setClientes(clientes);
@@ -169,10 +176,12 @@ public class Datos {
     }
 
     public static void cargarDatosHashMap(ClassLoader classLoader) {
+        String ruta = "src/main/resources/archivosSerializados/";
         try {
             GestorTablaProductos gestorTablaProductos = new GestorTablaProductos();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/productosHashMap.ser")) {
-                if (inputStream != null) {
+            File archivoProductosMap = new File(ruta + "productosHashMap.ser");
+            if (archivoProductosMap.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoProductosMap)) {
                     HashMap<Integer, Producto> productosHashMap = gestorTablaProductos.cargarDatos(inputStream);
                     if (productosHashMap != null) {
                         setTablaLookUpProductos(productosHashMap);
@@ -182,8 +191,9 @@ public class Datos {
             }
 
             GestorTablaEmpleados gestorTablaEmpleados = new GestorTablaEmpleados();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/empleadosHashMap.ser")) {
-                if (inputStream != null) {
+            File archivoEmpleadosMap = new File(ruta + "empleadosHashMap.ser");
+            if (archivoEmpleadosMap.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoEmpleadosMap)) {
                     HashMap<Integer, Empleado> empleadosHashMap = gestorTablaEmpleados.cargarDatos(inputStream);
                     if (empleadosHashMap != null) {
                         setTablaLookUpEmpleados(empleadosHashMap);
@@ -193,8 +203,9 @@ public class Datos {
             }
 
             GestorTablaClientes gestorTablaClientes = new GestorTablaClientes();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/clientesHashMap.ser")) {
-                if (inputStream != null) {
+            File archivoClientesMap = new File(ruta + "clientesHashMap.ser");
+            if (archivoClientesMap.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoClientesMap)) {
                     HashMap<Integer, Cliente> clientesHashMap = gestorTablaClientes.cargarDatos(inputStream);
                     if (clientesHashMap != null) {
                         setTablaLookUpClientes(clientesHashMap);
@@ -204,8 +215,9 @@ public class Datos {
             }
 
             GestorTablaVentas gestorTablaVentas = new GestorTablaVentas();
-            try (InputStream inputStream = classLoader.getResourceAsStream("archivosSerializados/ventasHashMap.ser")) {
-                if (inputStream != null) {
+            File archivoVentasMap = new File(ruta + "ventasHashMap.ser");
+            if (archivoVentasMap.exists()) {
+                try (InputStream inputStream = new FileInputStream(archivoVentasMap)) {
                     HashMap<Integer, Venta> ventasHashMap = gestorTablaVentas.cargarDatos(inputStream);
                     if (ventasHashMap != null) {
                         setTablaLookUpVentas(ventasHashMap);
