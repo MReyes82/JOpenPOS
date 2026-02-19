@@ -1,11 +1,9 @@
 package backend.modelos.herenciaEmpleados;
 
-import backend.modelos.Producto;
-
-import java.util.ArrayList;
-
 public class Panadero extends Empleado
 {
+    private static final long serialVersionUID = 1L;
+
     //public String especialidad;
 
     public Panadero() {

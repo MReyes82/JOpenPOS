@@ -88,6 +88,12 @@ public class VentanaListaProductos extends JFrame {
                     // Aquí puedes utilizar productoSeleccionado para editarlo
                     Producto productoSeleccionado = listaProductos.get(selectedRow);
                     VentanaEditarProducto editar = new VentanaEditarProducto(productoSeleccionado);
+                    editar.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent e) {
+                            refrescarTabla();
+                        }
+                    });
                     editar.setVisible(true);
                 }
             }
@@ -109,8 +115,9 @@ public class VentanaListaProductos extends JFrame {
                     // Aquí puedes utilizar productoSeleccionado para eliminarlo
                     Producto productoAEliminar = listaProductos.get(selectedRow);
                     new ModelosApp().eliminarProducto(productoAEliminar.getId());
+                    listaProductos.remove(selectedRow);
+                    modeloTabla.removeRow(selectedRow);
                     JOptionPane.showMessageDialog(null, "Producto eliminado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
                 }
             }
         });
@@ -143,6 +150,11 @@ public class VentanaListaProductos extends JFrame {
             modeloTabla.addRow(fila);
             listaProductos.add(producto); // Agregar el producto a la lista
         }
+    }
+
+    private void refrescarTabla() {
+        modeloTabla.setRowCount(0);
+        llenarTabla();
     }
 
     private List<Producto> obtenerTodosLosProductos() {

@@ -2,8 +2,10 @@ package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
 import backend.modelos.Cliente;
+import backend.saves.Datos;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -101,6 +103,18 @@ public class VentanaEditarCliente extends JFrame {
                 // Actualizar los datos del cliente
                 cliente.setTelefono(telefono);
                 cliente.setPuntos(puntos);
+
+                // Sincronizar con HashMap
+                Datos.getTablaLookUpClientes().put(cliente.getId(), cliente);
+
+                // Sincronizar con ArrayList
+                ArrayList<Cliente> clientes = Datos.getClientes();
+                for (int i = 0; i < clientes.size(); i++) {
+                    if (clientes.get(i).getId() == cliente.getId()) {
+                        clientes.set(i, cliente);
+                        break;
+                    }
+                }
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Cliente actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

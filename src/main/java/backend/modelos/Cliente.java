@@ -2,10 +2,13 @@ package backend.modelos;
 import backend.servicios.Factura;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.io.Serializable;
 
 public class Cliente implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private String nombre;
     private String apellido;
@@ -95,6 +98,19 @@ public class Cliente implements Serializable
 
     public ArrayList<Factura> getCompras() {
         return this.compras;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Cliente cliente = (Cliente) o;
+        return id == cliente.id;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 
     public void setCompras(ArrayList<Factura> compras) {

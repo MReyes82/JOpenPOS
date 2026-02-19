@@ -2,8 +2,10 @@ package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
 import backend.modelos.Producto;
+import backend.saves.Datos;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -94,6 +96,18 @@ public class VentanaEditarProducto extends JFrame {
                 // Actualizar los datos del producto
                 producto.setPrecio(precio);
                 producto.setStock(stock);
+
+                // Sincronizar con HashMap
+                Datos.getTablaLookUpProductos().put(producto.getId(), producto);
+
+                // Sincronizar con ArrayList
+                ArrayList<Producto> inventario = Datos.getInventario();
+                for (int i = 0; i < inventario.size(); i++) {
+                    if (inventario.get(i).getId() == producto.getId()) {
+                        inventario.set(i, producto);
+                        break;
+                    }
+                }
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Producto actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

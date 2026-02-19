@@ -15,6 +15,7 @@ import backend.modelos.herenciaEmpleados.Empleado;
 public class VentanaListaEmpleados extends JFrame {
     private JTable tablaEmpleados;
     private DefaultTableModel modeloTabla;
+    private List<Empleado> listaEmpleados;
 
     public VentanaListaEmpleados() {
         setTitle("Lista de Empleados");
@@ -79,9 +80,14 @@ public class VentanaListaEmpleados extends JFrame {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                     
                 } else {
-                    // Acción de edición (a implementar)
-                    Empleado empleadoSeleccionado = obtenerTodosLosEmpleados().get(selectedRow);
+                    Empleado empleadoSeleccionado = listaEmpleados.get(selectedRow);
                     VentanaEditarEmpleado editar = new VentanaEditarEmpleado(empleadoSeleccionado);
+                    editar.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent e) {
+                            refrescarTabla();
+                        }
+                    });
                     editar.setVisible(true);
                 }
             }
@@ -97,11 +103,11 @@ public class VentanaListaEmpleados extends JFrame {
                 if (selectedRow == -1) {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                 } else {
-                    // Acción de eliminación (a implementar)
-                    Empleado empleadoSeleccionado = obtenerTodosLosEmpleados().get(selectedRow);
+                    Empleado empleadoSeleccionado = listaEmpleados.get(selectedRow);
                     new ModelosApp().eliminarEmpleado(empleadoSeleccionado.getId());
+                    listaEmpleados.remove(selectedRow);
+                    modeloTabla.removeRow(selectedRow);
                     JOptionPane.showMessageDialog(null, "Empleado eliminado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
                 }
             }
         });
@@ -122,6 +128,7 @@ public class VentanaListaEmpleados extends JFrame {
 
     private void llenarTabla() {
         List<Empleado> todosEmpleados = obtenerTodosLosEmpleados();
+        listaEmpleados = new ArrayList<>(todosEmpleados);
 
         for (Empleado empleado : todosEmpleados) {
             Object[] fila = {
@@ -134,6 +141,11 @@ public class VentanaListaEmpleados extends JFrame {
             };
             modeloTabla.addRow(fila);
         }
+    }
+
+    private void refrescarTabla() {
+        modeloTabla.setRowCount(0);
+        llenarTabla();
     }
 
     private List<Empleado> obtenerTodosLosEmpleados() {

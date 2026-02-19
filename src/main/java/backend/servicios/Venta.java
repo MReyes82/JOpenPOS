@@ -1,14 +1,12 @@
 package backend.servicios;
 
-import backend.modelos.Cliente;
-import java.util.ArrayList;
-import java.util.Date;
-import backend.modelos.Producto;
-import backend.modelos.herenciaEmpleados.Vendedor;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Venta implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private Date fecha;
     private int idACliente;
