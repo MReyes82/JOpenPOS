@@ -1,18 +1,15 @@
 package backend.servicios;
 
-import backend.modelos.Cliente;
-import java.util.ArrayList;
-import java.util.Date;
-import backend.modelos.Producto;
-import backend.modelos.herenciaEmpleados.Vendedor;
 import java.io.Serializable;
+import java.util.Date;
 
 public class Venta implements Serializable
 {
+    private static final long serialVersionUID = 1L;
+
     private int id;
     private Date fecha;
     private int idACliente;
-    //private ArrayList<Producto> productosAdquiridos;
     private double totalVenta;
     private int idAVendedor; // referenci al vendedor que realizo la venta
 
@@ -21,7 +18,6 @@ public class Venta implements Serializable
         this.id = -1;
         this.fecha = new Date();
         this.idACliente = -1;
-        //this.productosAdquiridos = new ArrayList<Producto>();
         this.totalVenta = 0;
         this.idAVendedor = -1;
     }
@@ -68,11 +64,6 @@ public class Venta implements Serializable
 		this.totalVenta = totalVenta;
 	}
 
-	public void setTotalVente(double totalVenta)
-    {
-    	this.totalVenta = totalVenta;
-    }
-    
     public double getTotalVenta()
     {
     	return this.totalVenta;

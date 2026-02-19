@@ -1,6 +1,7 @@
 package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
+import backend.modelos.ModelosApp;
 import backend.modelos.herenciaEmpleados.Empleado;
 import backend.modelos.herenciaEmpleados.Turno;
 
@@ -114,6 +115,7 @@ public class VentanaEditarEmpleado extends JFrame {
                 // Actualizar los datos del empleado
                 empleado.setSalario(salario);
                 empleado.setTurno(turno);
+                new ModelosApp().editarEmpleado(empleado);
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Empleado actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

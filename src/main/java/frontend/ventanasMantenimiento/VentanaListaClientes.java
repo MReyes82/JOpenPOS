@@ -1,16 +1,26 @@
 package frontend.ventanasMantenimiento;
 
-import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
-import java.awt.*;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
+
+import backend.modelos.Cliente;
 import backend.modelos.ModelosApp;
 import backend.saves.Datos;
-import backend.modelos.Cliente;
 
 public class VentanaListaClientes extends JFrame {
     private JTable tablaClientes;
@@ -28,9 +38,6 @@ public class VentanaListaClientes extends JFrame {
 
     private void inicializarComponentes() {
         JPanel panelPrincipal = new JPanel(new BorderLayout());
-        // cargar datos de prueba
-        //Datos.inicializarDatos();
-        //Datos.cargarElementosTEST();
         
         // Columnas de la tabla
         String[] columnas = {"ID", "Nombre", "Apellido", "Teléfono", "Puntos"};
@@ -81,10 +88,14 @@ public class VentanaListaClientes extends JFrame {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                     
                 } else {
-                    // Acción de edición (a implementar)
-                    // Aquí puedes utilizar clienteSeleccionado para editarlo
                     Cliente clienteSeleccionado = listaClientes.get(selectedRow);
                     VentanaEditarCliente ventanaEditarCliente = new VentanaEditarCliente(clienteSeleccionado);
+                    ventanaEditarCliente.addWindowListener(new java.awt.event.WindowAdapter() {
+                        @Override
+                        public void windowClosed(java.awt.event.WindowEvent e) {
+                            refrescarTabla();
+                        }
+                    });
                     ventanaEditarCliente.setVisible(true);
                 }
             }
@@ -103,12 +114,12 @@ public class VentanaListaClientes extends JFrame {
                     JOptionPane.showMessageDialog(null, "Selecciona un elemento primero", "Error", JOptionPane.ERROR_MESSAGE);
                     
                 } else {
-                    // Acción de eliminación (a implementar)
-                    // Aquí puedes utilizar clienteSeleccionado para eliminarlo
+                    // Acción de eliminación
                     Cliente clienteAEliminar = listaClientes.get(selectedRow);
                     new ModelosApp().eliminarCliente(clienteAEliminar.getId());
+                    listaClientes.remove(selectedRow);
+                    modeloTabla.removeRow(selectedRow);
                     JOptionPane.showMessageDialog(null, "Cliente eliminado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-                    dispose();
                 }
             }
         });
@@ -142,6 +153,11 @@ public class VentanaListaClientes extends JFrame {
             modeloTabla.addRow(fila);
             listaClientes.add(cliente); // Agregar el cliente a la lista
         }
+    }
+
+    private void refrescarTabla() {
+        modeloTabla.setRowCount(0);
+        llenarTabla();
     }
 
     private List<Cliente> obtenerTodosLosClientes() {

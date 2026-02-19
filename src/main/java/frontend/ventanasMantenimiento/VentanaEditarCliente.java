@@ -2,6 +2,7 @@ package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
 import backend.modelos.Cliente;
+import backend.modelos.ModelosApp;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -101,6 +102,7 @@ public class VentanaEditarCliente extends JFrame {
                 // Actualizar los datos del cliente
                 cliente.setTelefono(telefono);
                 cliente.setPuntos(puntos);
+                new ModelosApp().editarCliente(cliente);
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Cliente actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);

@@ -5,6 +5,8 @@ import java.util.ArrayList;
 
 public class Vendedor extends Empleado
 {
+    private static final long serialVersionUID = 1L;
+
     private ArrayList<Venta> ventasRealizadas;
 
     public Vendedor() {

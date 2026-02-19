@@ -2,6 +2,8 @@ package backend.modelos.herenciaEmpleados;
 
 public class Limpieza extends Empleado
 {
+    private static final long serialVersionUID = 1L;
+
     // public String areaDesignada;
     public Limpieza() {
         super();

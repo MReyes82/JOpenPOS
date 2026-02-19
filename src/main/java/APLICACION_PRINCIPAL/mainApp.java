@@ -3,9 +3,6 @@ package APLICACION_PRINCIPAL;
 import backend.saves.Datos;
 import frontend.ventanasLogin.Login;
 
-// NOTAS: MODULOS DE LECTURA Y ESCRITURA DESACTIVADOS
-// CON FINES DE PRUEBA, SE CARGARAN DATOS DE PRUEBA
-
 public class mainApp {
     public static void main(String[] args) {
         System.out.println("Bienvenido.");
@@ -15,7 +12,7 @@ public class mainApp {
     }
 
     public static void iniciarModulosInfo() {
-        System.out.println("BIENVENIDO, BREAD_STOREV1.0");
+        System.out.println("BIENVENIDO, JOpenPOSV1.0");
         System.out.println("INICIALIZANDO MODULOS DE INFORMACION");
 
         try {

@@ -1,6 +1,7 @@
 package frontend.ventanasMantenimiento;
 
 import javax.swing.*;
+import backend.modelos.ModelosApp;
 import backend.modelos.Producto;
 
 import java.awt.*;
@@ -94,6 +95,7 @@ public class VentanaEditarProducto extends JFrame {
                 // Actualizar los datos del producto
                 producto.setPrecio(precio);
                 producto.setStock(stock);
+                new ModelosApp().editarProducto(producto);
 
                 // Mostrar mensaje de éxito
                 JOptionPane.showMessageDialog(this, "Producto actualizado con éxito", "Éxito", JOptionPane.INFORMATION_MESSAGE);
